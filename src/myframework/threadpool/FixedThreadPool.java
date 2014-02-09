@@ -5,9 +5,9 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
- * 
+ * A fixed thread pool based on ThreadGroup and BlockingQueue.
  * @author Fan
- *
+ * 
  */
 public class FixedThreadPool implements Executor {
 
@@ -37,9 +37,9 @@ public class FixedThreadPool implements Executor {
 		}
 	}
 
-	
 	/**
 	 * Add a task to task queue
+	 * 
 	 * @param task task to execute
 	 */
 	@Override
@@ -50,16 +50,15 @@ public class FixedThreadPool implements Executor {
 		workQueue.add(task);
 	}
 
-	
 	/**
 	 * Finish all tasks in task queue
 	 */
 	public void finish() {
 		isClosed = true;
-		//Take active threads from thread group
+		// Take active threads from thread group
 		Thread[] threads = new Thread[threadGroup.activeCount()];
 		int count = threadGroup.enumerate(threads);
-		
+
 		for (int i = 0; i < count; i++) {
 			try {
 				threads[i].join();
@@ -69,7 +68,6 @@ public class FixedThreadPool implements Executor {
 		}
 		threadGroup.interrupt();
 	}
-	
 
 	/**
 	 * Close thread pool

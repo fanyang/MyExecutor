@@ -3,13 +3,9 @@ package myframework.threadpool;
 import org.junit.Test;
 
 
-
 public class ThreadPoolTest {
 
-	/**
-	 * @param args
-	 * @throws InterruptedException 
-	 */
+
 	@Test
 	public void testExecute() {
 		FixedThreadPool pool = new FixedThreadPool(6);
@@ -34,7 +30,6 @@ public class ThreadPoolTest {
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
